@@ -1,0 +1,231 @@
+<!--
+Mobile Web Development
+Assigment #2 work for PROG2430-2 using html5 with JQuery Mobile
+Created by: Enrico Pellini - 8767692
+email: epellini7692@conestogac.on.ca
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>jQuery Mobile app template</title>
+        <!--jQuery-->
+        <script src="js/lib/jquery-2.1.4.js"></script>
+        <!--jQuery Mobile-->
+        <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+        <!--jQuery Mobile stylesheet-->
+        <link rel="stylesheet" href="css/lib/jquery.mobile-1.4.5.css">
+        <!--our scripts-->
+        <script src="js/EPDAL.js"></script>
+        <script src="js/EPdatabase.js"></script>
+        <script src="js/EPfacade.js"></script>
+        <script src="js/EPglobal.js"></script>
+        <script src="js/EPutil.js"></script>
+        <script src="js/myscript.js"></script>
+
+        <!--our styles-->
+        <link rel="stylesheet" href="css/mystyle.css">
+    </head>
+
+    <body>
+        <!--Home page-->
+        <div id="EPHomePage" data-role="page">
+            <header data-role="header" data-position="fixed" data-theme="a">
+                <h1>EP Feedback A2</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#EPHomePage" data-icon="home" class="ui-btn-active ui-state-persist">Home</a></li>
+                        <li><a href="#EPAddFeedbackPage" data-icon="plus">Add</a></li>
+                        <li><a href="#EPViewFeedbackPage" data-icon="grid">Reviews</a></li>
+                        <li><a href="#EPSettingsPage" data-icon="gear">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <h1>Enrico Pellini's Feedback A2 App</h1>
+                <p>Welcome to the Enrico Pellini's Feedback A2 app.
+                    A prototype designed for mobile programming
+                    class. This is the first iteration of the app to keep
+
+                    track of different places you visited along with your
+                    reviews.
+                </p>
+
+                <div align="center">
+                    <img src="./img/coin.png" alt="App image of a coin" style="max-width: 50%">
+                </div>
+
+                <p>Please feel free to contact me if you have any suggestions!</p>
+
+                <a href="#" data-role="button" data-icon="plus">Call 519.748.5220</a>
+                <a href="#" data-role="button" data-icon="plus">epellini7692@conestogac.on.ca</a>
+                <p>Website:</p>
+                <a href="#" data-role="button" data-icon="plus">Conestoga College</a>
+            </section>
+
+            <footer data-role="footer" data-position="fixed" data-theme="a">
+                <h1>&copy; 2023 Enrico Pellini</h1>
+            </footer>
+        </div>
+
+        <!--ADD FEEDBACK PAGE-->
+        <div id="EPAddFeedbackPage" data-role="page">
+            <header data-role="header" data-position="fixed" data-theme="a">
+                <h1>Add a Feedback</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#EPHomePage" data-icon="home">Home</a></li>
+                        <li><a href="#EPAddFeedbackPage" data-icon="plus" class="ui-btn-active ui-state-persist">Add</a></li>
+                        <li><a href="#EPViewFeedbackPage" data-icon="grid">Reviews</a></li>
+                        <li><a href="#EPSettingsPage" data-icon="gear">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+
+            <section data-role="content">
+                <form id="frmAdd" name="frmAdd" data-ajax="false">
+
+                    <label for="txtNameAdd">Business Name:</label>
+                    <input type="text" id="txtNameAdd" name="txtNameAdd"
+                           class="required" data-clear-btn="true">
+
+                    <label for="txtEmail">Reviewer Email:</label>
+                    <input type="text" id="txtEmail" name="txtEmail"
+                           class="required" data-clear-btn="true">
+
+                    <label for="txtComments">Reviewer Comments:</label>
+                    <textarea id="txtComments" name="txtComments" class="required" data-clear-btn="true"></textarea>
+
+                    <label for="numRating">Overall Ratings (1-100):</label>
+                    <input type="number" id="numRating" name="numRating" min="0" max="100" value="1">
+
+                    <button class="ui-btn-active" data-inline="true" type="button" data-role="button" id="btnSave" name="btnSave">Save</button>
+                </form>
+            </section>
+
+            <select id="type-combobox">
+                <option value="Other" selected>Other</option>
+                <option value="Asian">Asian</option>
+                <option value="Canadian">Canadian</option>
+            </select>
+
+            <footer data-role="footer" data-position="fixed" data-theme="a">
+                <h1>&copy; 2023 Enrico Pellini</h1>
+            </footer>
+        </div>
+
+        <!--REVIEWS PAGE-->
+        <div id="EPViewFeedbackPage" data-role="page">
+            <header data-role="header" data-position="fixed" data-theme="a">
+                <h1>List of Reviews</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#EPHomePage" data-icon="home">Home</a></li>
+                        <li><a href="#EPAddFeedbackPage" data-icon="plus">Add</a></li>
+                        <li><a href="#EPViewFeedbackPage" data-icon="grid" class="ui-btn-active ui-state-persist">Reviews</a></li>
+                        <li><a href="#EPSettingsPage" data-icon="gear">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+
+                <ul data-role="listview" data-inset="false" id="lstViewFeedback" name="lstViewFeedback">
+                    <li> <a href="#ModifyFeedbackPage">
+                        <h2>Business Name: Big Joe Diner</h2>
+                        <p>Reviewer Email: matthias@email.com</p>
+                        <p>Comments: Great food, but Joe is rude!</p>
+                        <p>Overall Rating: 60%</p>
+                        </a>
+                    </li>
+                    <li>
+                        <h2>Business Name: Slay Hair Salon</h2>
+                        <p>Reviewer Email: cindy@email.com</p>
+                        <p>Comments: Definitely not slaying! My hair looks horrendous!</p>
+                        <p>Overall Rating: 10%</p>
+                    </li>
+                </ul>
+
+            </section>
+            <footer data-role="footer" data-position="fixed" data-theme="a">
+                <h1>&copy; 2023 Enrico Pellini</h1>
+            </footer>
+        </div>
+
+
+        <!--EDIT FEEDBACK PAGE-->
+        <div id="ModifyFeedbackPage" data-role="page">
+            <header data-role="header" data-position="fixed" data-theme="a">
+                <h1>Modify Feedback</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#EPHomePage" data-icon="home">Home</a></li>
+                        <li><a href="#EPAddFeedbackPage" data-icon="plus">Add</a></li>
+                        <li><a href="#EPViewFeedbackPage" data-icon="grid" class="ui-btn-active ui-state-persist">Reviews</a></li>
+                        <li><a href="#EPSettingsPage" data-icon="gear">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+
+            <section data-role="content">
+                <form id="frmEdit" name="frmEdit" data-ajax="false">
+
+                    <label for="txtNameEdit">Business Name:</label>
+                    <input type="text" id="txtNameEdit" name="txtNameEdit"
+                           class="required" data-clear-btn="true" value="Big Joe Diner">
+
+                    <label for="txtEmailEdit">Reviewer Email:</label>
+                    <input type="text" id="txtEmailEdit" name="txtEmailEdit"
+                           class="required" data-clear-btn="true" value="matthias@email.com">
+
+                    <label for="txtCommentsEdit">Reviewer Comments:</label>
+                    <textarea id="txtCommentsEdit" name="txtCommentsEdit"
+                              class="required" data-clear-btn="true">Great food, but Joe is rude!</textarea>
+
+                    <label for="numRatingEdit">Overall Ratings (1-100):</label>
+                    <input type="number" id="numRatingEdit" name="numRatingEdit" min="0" max="100" value="60">
+
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <button type="button" data-role="button" id="btnCancel" name="btnCancel">Cancel</button>
+                        <button data-theme="b" type="button" data-role="button" id="btnDelete" name="btnDelete">Delete</button>
+                        <button class="ui-btn-active" type="button" data-role="button" id="btnUpdate" name="btnUpdate">Update</button>
+                    </div>
+                </form>
+            </section>
+
+            <footer data-role="footer" data-position="fixed" data-theme="a">
+                <h1>&copy; 2023 Enrico Pellini</h1>
+            </footer>
+        </div>
+
+        <!--SETTINGS PAGE-->
+        <div id="EPSettingsPage" data-role="page">
+            <header data-role="header" data-position="fixed" data-theme="a">
+                <h1>Settings</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#EPHomePage" data-icon="home">Home</a></li>
+                        <li><a href="#EPAddFeedbackPage" data-icon="plus">Add</a></li>
+                        <li><a href="#EPViewFeedbackPage" data-icon="grid">Reviews</a></li>
+                        <li><a href="#EPSettingsPage" data-icon="gear" class="ui-btn-active ui-state-persist">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+
+            <section data-role="content">
+                <p>Default reviewer Email:</p>
+                <form id="frmDefault" name="frmDefault" data-ajax="false">
+                <input type="text" id="txtDefaultEmail" name="txtDefaultEmail"
+                       class="required" data-clear-btn="true">
+                </form>
+
+                <button class="ui-btn-active" type="button"data-role="button" id="btnSaveDefaults" name="btnCancel">Save Defaults</button>
+                <button data-theme="b" type="button" data-role="button" id="btnClearDatabase" name="btnDelete">Clear Database</button>
+            </section>
+
+            <footer data-role="footer" data-position="fixed" data-theme="a">
+                <h1>&copy; 2023 Enrico Pellini</h1>
+            </footer>
+        </div>
+    </body>
+</html>
